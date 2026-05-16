@@ -1,0 +1,3244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>专业购物小管家</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7f6f3;
+            --bg-tertiary: #f1f1ef;
+            --bg-hover: #e8e7e4;
+            --text-primary: #37352f;
+            --text-secondary: #6b6b6b;
+            --text-tertiary: #9b9a97;
+            --accent-blue: #2383e2;
+            --accent-blue-light: #e8f4fc;
+            --accent-green: #0f7b6c;
+            --accent-green-light: #e3f2e9;
+            --accent-yellow: #dfab01;
+            --accent-yellow-light: #fbf3db;
+            --accent-red: #e03e3e;
+            --accent-red-light: #fbe4e4;
+            --accent-purple: #9065b0;
+            --accent-purple-light: #f3e8f9;
+            --accent-orange: #d9730d;
+            --accent-orange-light: #fae3c0;
+            --border-color: #e9e9e7;
+            --shadow-sm: 0 1px 3px rgba(55, 53, 47, 0.08);
+            --shadow-md: 0 4px 6px rgba(55, 53, 47, 0.08);
+            --shadow-lg: 0 8px 16px rgba(55, 53, 47, 0.12);
+            --safe-area-top: env(safe-area-inset-top, 0px);
+            --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* 页面容器 */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-bottom: calc(80px + var(--safe-area-bottom));
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* 状态栏 */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            padding-top: calc(12px + var(--safe-area-top));
+            background: var(--bg-primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .status-time {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .status-icons {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+        
+        .status-icon {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .status-version {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            background: var(--accent-blue-light);
+            border-radius: 12px;
+            cursor: pointer;
+        }
+        
+        .status-version.enterprise {
+            background: var(--accent-purple-light);
+        }
+        
+        .status-version span {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--accent-blue);
+        }
+        
+        .status-version.enterprise span {
+            color: var(--accent-purple);
+        }
+        
+        .status-version svg {
+            width: 12px;
+            height: 12px;
+            stroke: var(--accent-blue);
+        }
+        
+        .status-version.enterprise svg {
+            stroke: var(--accent-purple);
+        }
+        
+        /* 欢迎页 */
+        .welcome-header {
+            padding: 24px 16px;
+            text-align: center;
+        }
+        
+        .welcome-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .welcome-avatar svg {
+            width: 40px;
+            height: 40px;
+            stroke: white;
+            fill: none;
+        }
+        
+        .welcome-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        
+        .welcome-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        /* 快捷入口 */
+        .quick-actions {
+            padding: 16px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        
+        .quick-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 8px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .quick-action:active {
+            transform: scale(0.95);
+            background: var(--bg-hover);
+        }
+        
+        .quick-action-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quick-action-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2;
+        }
+        
+        .quick-action-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-align: center;
+        }
+        
+        /* 功能卡片 */
+        .feature-cards {
+            padding: 0 16px 16px;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 12px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .feature-card:active {
+            transform: scale(0.98);
+        }
+        
+        .feature-card.orange {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .feature-card.green {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .feature-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .feature-card-desc {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        
+        .feature-card-tag {
+            display: inline-block;
+            padding: 4px 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            font-size: 11px;
+            margin-top: 12px;
+        }
+        
+        /* 最近商品 */
+        .recent-section {
+            padding: 16px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .section-more {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            cursor: pointer;
+        }
+        
+        .product-list {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .product-list::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .product-card {
+            flex-shrink: 0;
+            width: 140px;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .product-card:active {
+            transform: scale(0.98);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 120px;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-image svg {
+            width: 48px;
+            height: 48px;
+            stroke: var(--text-tertiary);
+        }
+        
+        .product-info {
+            padding: 12px;
+        }
+        
+        .product-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .product-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent-red);
+        }
+        
+        .product-price-old {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            text-decoration: line-through;
+            margin-left: 4px;
+        }
+        
+        /* 底部导航 */
+        .tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            padding-bottom: var(--safe-area-bottom);
+            z-index: 200;
+        }
+        
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            padding: 8px 0;
+            cursor: pointer;
+            color: var(--text-tertiary);
+            transition: color 0.2s;
+        }
+        
+        .tab-item.active {
+            color: var(--accent-blue);
+        }
+        
+        .tab-item svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .tab-item span {
+            font-size: 10px;
+            font-weight: 500;
+        }
+        
+        /* 聊天页面 */
+        .chat-header {
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-primary);
+            position: sticky;
+            top: calc(44px + var(--safe-area-top));
+            z-index: 50;
+        }
+        
+        .chat-header-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .chat-messages {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            min-height: calc(100vh - 200px);
+        }
+        
+        .message {
+            display: flex;
+            gap: 12px;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .message.user {
+            flex-direction: row-reverse;
+        }
+        
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .message.user .message-avatar {
+            background: var(--accent-blue);
+        }
+        
+        .message-avatar svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text-secondary);
+        }
+        
+        .message.user .message-avatar svg {
+            stroke: white;
+        }
+        
+        .message-content {
+            max-width: 70%;
+        }
+        
+        .message-bubble {
+            padding: 12px 16px;
+            border-radius: 16px;
+            background: var(--bg-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .message.user .message-bubble {
+            background: var(--accent-blue);
+            color: white;
+        }
+        
+        .message-time {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            margin-top: 4px;
+            text-align: right;
+        }
+        
+        .message.user .message-time {
+            text-align: left;
+        }
+        
+        /* 商品卡片消息 */
+        .message-product {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 8px;
+            display: flex;
+            gap: 12px;
+            cursor: pointer;
+        }
+        
+        .message-product:active {
+            background: var(--bg-secondary);
+        }
+        
+        .message-product-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .message-product-image svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--text-tertiary);
+        }
+        
+        .message-product-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .message-product-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        .message-product-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .message-product-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent-red);
+        }
+        
+        /* 输入框 */
+        .input-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-color);
+            padding: 12px 16px;
+            padding-bottom: calc(12px + var(--safe-area-bottom));
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+            z-index: 200;
+        }
+        
+        .input-tools {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .input-tool {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .input-tool:active {
+            background: var(--bg-hover);
+            transform: scale(0.95);
+        }
+        
+        .input-tool svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text-secondary);
+            stroke-width: 2;
+        }
+        
+        .input-field {
+            flex: 1;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 10px 16px;
+            font-size: 14px;
+            border: none;
+            outline: none;
+            resize: none;
+            max-height: 100px;
+            font-family: inherit;
+        }
+        
+        .input-field:focus {
+            background: var(--bg-hover);
+        }
+        
+        .input-send {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .input-send:active {
+            transform: scale(0.95);
+        }
+        
+        .input-send svg {
+            width: 18px;
+            height: 18px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+        
+        /* 商品列表页 */
+        .search-bar {
+            padding: 16px;
+            background: var(--bg-primary);
+            position: sticky;
+            top: calc(44px + var(--safe-area-top));
+            z-index: 50;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 16px 12px 40px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: none;
+            font-size: 14px;
+            outline: none;
+            font-family: inherit;
+        }
+        
+        .search-wrapper {
+            position: relative;
+        }
+        
+        .search-wrapper svg {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            stroke: var(--text-tertiary);
+        }
+        
+        .filter-tags {
+            display: flex;
+            gap: 8px;
+            padding: 0 16px 16px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .filter-tags::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .filter-tag {
+            flex-shrink: 0;
+            padding: 8px 16px;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .filter-tag.active {
+            background: var(--accent-blue);
+            color: white;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 0 16px 16px;
+        }
+        
+        .product-grid .product-card {
+            width: 100%;
+        }
+        
+        /* 商品详情页 */
+        .detail-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            padding-top: calc(16px + var(--safe-area-top));
+            background: var(--bg-primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .back-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .back-btn:active {
+            background: var(--bg-hover);
+        }
+        
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text-primary);
+            stroke-width: 2;
+        }
+        
+        .detail-title {
+            flex: 1;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .detail-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .detail-image svg {
+            width: 120px;
+            height: 120px;
+            stroke: var(--text-tertiary);
+        }
+        
+        .detail-info {
+            padding: 16px;
+        }
+        
+        .detail-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .detail-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-red);
+            margin-bottom: 16px;
+        }
+        
+        .detail-price-old {
+            font-size: 14px;
+            color: var(--text-tertiary);
+            text-decoration: line-through;
+            margin-left: 8px;
+        }
+        
+        .detail-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .detail-tag {
+            padding: 4px 12px;
+            background: var(--accent-red-light);
+            color: var(--accent-red);
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .detail-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .detail-section {
+            margin-top: 24px;
+        }
+        
+        .detail-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .price-history {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+        }
+        
+        .price-trend {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .price-trend-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-green);
+        }
+        
+        .price-trend-label {
+            font-size: 11px;
+            color: var(--text-tertiary);
+        }
+        
+        .detail-actions {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-color);
+            padding: 12px 16px;
+            padding-bottom: calc(12px + var(--safe-area-bottom));
+            display: flex;
+            gap: 12px;
+            z-index: 200;
+        }
+        
+        .detail-btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .detail-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .detail-btn.secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        
+        .detail-btn.primary {
+            background: var(--accent-blue);
+            color: white;
+        }
+        
+        /* 家人档案页 */
+        .family-header {
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .family-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .family-members {
+            padding: 16px;
+        }
+        
+        .family-member {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .family-member:active {
+            transform: scale(0.98);
+        }
+        
+        .member-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .member-info {
+            flex: 1;
+        }
+        
+        .member-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .member-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .member-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .member-tag {
+            padding: 2px 8px;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+        
+        .add-member {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            border: 2px dashed var(--border-color);
+            color: var(--text-tertiary);
+            cursor: pointer;
+        }
+        
+        .add-member svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-tertiary);
+        }
+        
+        /* 价格监控页 */
+        .monitor-header {
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .monitor-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .monitor-list {
+            padding: 16px;
+        }
+        
+        .monitor-item {
+            display: flex;
+            gap: 12px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .monitor-item:active {
+            transform: scale(0.98);
+        }
+        
+        .monitor-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .monitor-image svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--text-tertiary);
+        }
+        
+        .monitor-info {
+            flex: 1;
+        }
+        
+        .monitor-name {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .monitor-price {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        
+        .monitor-current {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-red);
+        }
+        
+        .monitor-target {
+            font-size: 12px;
+            color: var(--accent-green);
+        }
+        
+        .monitor-status {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .monitor-status svg {
+            width: 14px;
+            height: 14px;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        
+        .status-dot.watching {
+            background: var(--accent-green);
+        }
+        
+        .status-dot.alert {
+            background: var(--accent-red);
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* 企业版欢迎页 */
+        .enterprise-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 24px 16px;
+            color: white;
+        }
+        
+        .enterprise-header h1 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        
+        .enterprise-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .company-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            margin: 16px;
+            border-radius: 12px;
+        }
+        
+        .company-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        .company-detail h3 {
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+        
+        .company-detail p {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        /* 订单导入页 */
+        .import-header {
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .import-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .import-area {
+            padding: 24px 16px;
+        }
+        
+        .import-box {
+            border: 2px dashed var(--border-color);
+            border-radius: 16px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .import-box:active {
+            background: var(--bg-secondary);
+            border-color: var(--accent-blue);
+        }
+        
+        .import-box svg {
+            width: 48px;
+            height: 48px;
+            stroke: var(--accent-blue);
+            margin-bottom: 16px;
+        }
+        
+        .import-box h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        
+        .import-box p {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .import-tips {
+            margin-top: 24px;
+            padding: 16px;
+            background: var(--accent-blue-light);
+            border-radius: 12px;
+        }
+        
+        .import-tips h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+        }
+        
+        .import-tips p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* 智能补货页 */
+        .replenish-header {
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .replenish-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .replenish-list {
+            padding: 16px;
+        }
+        
+        .replenish-item {
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .replenish-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .replenish-product {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .replenish-product-image {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .replenish-product-image svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-tertiary);
+        }
+        
+        .replenish-product-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .replenish-urgency {
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .replenish-urgency.high {
+            background: var(--accent-red-light);
+            color: var(--accent-red);
+        }
+        
+        .replenish-urgency.medium {
+            background: var(--accent-yellow-light);
+            color: var(--accent-yellow);
+        }
+        
+        .replenish-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 12px;
+        }
+        
+        .replenish-stat {
+            text-align: center;
+        }
+        
+        .replenish-stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .replenish-stat-label {
+            font-size: 11px;
+            color: var(--text-tertiary);
+        }
+        
+        .replenish-action {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        
+        .replenish-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .replenish-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .replenish-btn.secondary {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        .replenish-btn.primary {
+            background: var(--accent-blue);
+            color: white;
+        }
+        
+        /* 发票管理页 */
+        .invoice-header {
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .invoice-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .invoice-list {
+            padding: 16px;
+        }
+        
+        .invoice-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+        
+        .invoice-item:active {
+            background: var(--bg-hover);
+        }
+        
+        .invoice-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: var(--accent-blue-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .invoice-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--accent-blue);
+        }
+        
+        .invoice-info {
+            flex: 1;
+        }
+        
+        .invoice-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .invoice-default {
+            display: inline-block;
+            padding: 2px 6px;
+            background: var(--accent-green-light);
+            color: var(--accent-green);
+            border-radius: 4px;
+            font-size: 10px;
+            margin-top: 4px;
+        }
+        
+        .add-invoice {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 2px dashed var(--border-color);
+            color: var(--text-tertiary);
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        
+        .add-invoice svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        /* 端午福利页 */
+        .festival-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 24px 16px;
+            color: white;
+            text-align: center;
+        }
+        
+        .festival-header h1 {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+        
+        .festival-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .festival-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        
+        .festival-products {
+            padding: 16px;
+        }
+        
+        .festival-product {
+            display: flex;
+            gap: 12px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .festival-product-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .festival-product-image svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--text-tertiary);
+        }
+        
+        .festival-product-info {
+            flex: 1;
+        }
+        
+        .festival-product-name {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .festival-product-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .festival-product-price {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        
+        .festival-product-current {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent-red);
+        }
+        
+        .festival-product-discount {
+            font-size: 12px;
+            color: var(--accent-green);
+        }
+        
+        /* 数据分析页 */
+        .analytics-header {
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .analytics-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .analytics-summary {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 16px;
+        }
+        
+        .summary-card {
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+        }
+        
+        .summary-card.highlight {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+        }
+        
+        .summary-value {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .summary-label {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        
+        .summary-trend {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        
+        .summary-card.highlight .summary-trend {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .summary-trend.up {
+            color: var(--accent-green);
+        }
+        
+        .summary-trend.down {
+            color: var(--accent-red);
+        }
+        
+        .analytics-section {
+            padding: 16px;
+        }
+        
+        .analytics-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .chart-placeholder {
+            height: 200px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-tertiary);
+            font-size: 14px;
+        }
+        
+        /* 供应商评估页 */
+        .supplier-header {
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .supplier-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .supplier-list {
+            padding: 16px;
+        }
+        
+        .supplier-item {
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .supplier-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .supplier-name {
+            font-size: 15px;
+            font-weight: 600;
+        }
+        
+        .supplier-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .supplier-stars {
+            color: var(--accent-yellow);
+            font-size: 14px;
+        }
+        
+        .supplier-score {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-left: 8px;
+        }
+        
+        .supplier-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        
+        .supplier-metric {
+            text-align: center;
+            padding: 8px;
+            background: var(--bg-primary);
+            border-radius: 8px;
+        }
+        
+        .supplier-metric-value {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .supplier-metric-label {
+            font-size: 10px;
+            color: var(--text-tertiary);
+            margin-top: 2px;
+        }
+        
+        /* Toast提示 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
+        /* 下拉菜单 */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+            padding: 8px;
+            min-width: 200px;
+            z-index: 100;
+            display: none;
+        }
+        
+        .dropdown-menu.show {
+            display: block;
+        }
+        
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        
+        .dropdown-item:active {
+            background: var(--bg-secondary);
+        }
+        
+        .dropdown-item svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--text-secondary);
+        }
+        
+        .dropdown-item span {
+            font-size: 14px;
+        }
+        
+        /* Loading动画 */
+        .loading-dots {
+            display: flex;
+            gap: 4px;
+            padding: 8px 0;
+        }
+        
+        .loading-dots span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-tertiary);
+            animation: loading 1.4s infinite ease-in-out both;
+        }
+        
+        .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes loading {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        
+        /* 快捷建议 */
+        .quick-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        
+        .suggestion-chip {
+            padding: 8px 14px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            font-size: 13px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .suggestion-chip:active {
+            background: var(--accent-blue);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast提示 -->
+    <div id="toast" class="toast"></div>
+    
+    <!-- ========== 个人版欢迎页 ========== -->
+    <div id="page-home" class="page active">
+        <div class="status-bar">
+            <span class="status-time">09:41</span>
+            <div class="status-icons">
+                <div class="status-version" onclick="showVersionMenu(event)">
+                    <span>个人版</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                    <div id="version-menu" class="dropdown-menu">
+                        <div class="dropdown-item" onclick="switchVersion('personal')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span>个人版</span>
+                        </div>
+                        <div class="dropdown-item" onclick="switchVersion('enterprise')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                            <span>企业版</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="welcome-header">
+            <div class="welcome-avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+            <h1 class="welcome-title">你好，靑枫 👋</h1>
+            <p class="welcome-subtitle">今天想买点什么？</p>
+        </div>
+        
+        <div class="quick-actions">
+            <div class="quick-action" onclick="navigateTo('chat')">
+                <div class="quick-action-icon" style="background: var(--accent-blue-light);">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </div>
+                <span class="quick-action-label">智能对话</span>
+            </div>
+            <div class="quick-action" onclick="navigateTo('products')">
+                <div class="quick-action-icon" style="background: var(--accent-green-light);">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                </div>
+                <span class="quick-action-label">商品列表</span>
+            </div>
+            <div class="quick-action" onclick="navigateTo('family')">
+                <div class="quick-action-icon" style="background: var(--accent-yellow-light);">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-yellow)" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <span class="quick-action-label">家人档案</span>
+            </div>
+            <div class="quick-action" onclick="navigateTo('monitor')">
+                <div class="quick-action-icon" style="background: var(--accent-red-light);">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-red)" stroke-width="2">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                    </svg>
+                </div>
+                <span class="quick-action-label">价格监控</span>
+            </div>
+        </div>
+        
+        <div class="feature-cards">
+            <div class="feature-card" onclick="navigateTo('chat')">
+                <div class="feature-card-title">🎁 节日送礼推荐</div>
+                <div class="feature-card-desc">母亲节礼物精选，温馨好物一键选购</div>
+                <span class="feature-card-tag">热门活动</span>
+            </div>
+            <div class="feature-card orange" onclick="navigateTo('products')">
+                <div class="feature-card-title">⚡ 限时特惠</div>
+                <div class="feature-card-desc">今日爆款直降，最高立省300元</div>
+                <span class="feature-card-tag">仅剩2小时</span>
+            </div>
+        </div>
+        
+        <div class="recent-section">
+            <div class="section-header">
+                <span class="section-title">最近浏览</span>
+                <span class="section-more" onclick="navigateTo('products')">查看全部 ></span>
+            </div>
+            <div class="product-list">
+                <div class="product-card" onclick="navigateTo('detail')">
+                    <div class="product-image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">戴森吸尘器V15</div>
+                        <div class="product-price">¥4,990 <span class="product-price-old">¥5,990</span></div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="navigateTo('detail')">
+                    <div class="product-image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">茅台飞天53度</div>
+                        <div class="product-price">¥1,499 <span class="product-price-old">¥1,699</span></div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="navigateTo('detail')">
+                    <div class="product-image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Apple AirPods Pro</div>
+                        <div class="product-price">¥1,799 <span class="product-price-old">¥1,999</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-bar">
+            <div class="tab-item active" onclick="navigateTo('home')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>首页</span>
+            </div>
+            <div class="tab-item" onclick="navigateTo('products')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <span>发现</span>
+            </div>
+            <div class="tab-item" onclick="navigateTo('chat')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span>对话</span>
+            </div>
+            <div class="tab-item" onclick="navigateTo('profile')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>我的</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== 聊天对话页 ========== -->
+    <div id="page-chat" class="page">
+        <div class="status-bar">
+            <span class="status-time">09:41</span>
+            <div class="status-icons">
+                <svg class="status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+                <svg class="status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="1" y="6" width="18" height="12" rx="2" ry="2"></rect>
+                    <line x1="23" y1="13" x2="23" y2="11"></line>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="chat-header">
+            <div class="chat-header-title">购物小管家</div>
+        </div>
+        
+        <div class="chat-messages" id="chat-messages">
+            <div class="message">
+                <div class="message-avatar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <div class="message-content">
+                    <div class="message-bubble">
+                        你好！我是你的购物小管家 👋 今天想买点什么？我可以帮你：
+                        <div class="quick-suggestions">
+                            <span class="suggestion-chip" onclick="sendSuggestion('推荐一些母亲节礼物')">推荐母亲节礼物</span>
+                            <span class="suggestion-chip" onclick="sendSuggestion('帮我找一款性价比高的吸尘器')">找高性价比吸尘器</span>
+                            <span class="suggestion-chip" onclick="sendSuggestion('监控茅台价格变动')">监控商品价格</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="input-bar">
+            <div class="input-tools">
+                <div class="input-tool" onclick="showToast('语音功能开发中')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                        <line x1="12" y1="19" x2="12" y2="23"></line>
+                        <line x1="8" y1="23" x2="16" y2="23"></line>
+                    </svg>
+                </div>
+            </div>
+            <input type="text" class="input-field" id="chat-input" placeholder="输入你想买的东西..." onkeypress="handleKeyPress(event)">
+            <div class="input-send" onclick="sendMessage()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== 商品列表页 ========== -->
+    <div id="page-products" class="page">
+        <div class="status-bar">
+            <span class="status-time">09:41</span>
+            <div class="status-icons">
+                <svg class="status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="search-bar">
+            <div class="search-wrapper">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="search-input" placeholder="搜索商品..." id="search-input" oninput="filterProducts()">
+            </div>
+        </div>
+        
+        <div class="filter-tags">
+            <span class="filter-tag active" onclick="selectFilter(this, 'all')">全部</span>
+            <span class="filter-tag" onclick="selectFilter(this, 'electronics')">数码电器</span>
+            <span class="filter-tag" onclick="selectFilter(this, 'food')">食品酒水</span>
+            <span class="filter-tag" onclick="selectFilter(this, 'home')">家居生活</span>
+            <span class="filter-tag" onclick="selectFilter(this, 'gift')">礼品</span>
+        </div>
+        
+        <div class="product-grid" id="product-grid">
+            <!-- 动态生成 -->
+        </div>
+        
+        <div class="tab-bar">
+            <div class="tab-item" onclick="navigateTo('home')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>首页</span>
+            </div>
+            <div class="tab-item active" onclick="navigateTo('products')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <span>发现</span>
+            </div>
+            <div class="tab-item" onclick="navigateTo('chat')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span>对话</span>
+            </div>
+            <div class="tab-item" onclick="navigateTo('profile')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>我的</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== 商品详情页 ========== -->
+    <div id="page-detail" class="page">
+        <div class="detail-header">
+            <div class="back-btn" onclick="goBack()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </div>
+            <div class="detail-title" id="detail-title">商品详情</div>
+            <div style="width: 36px;"></div>
+        </div>
+        
+        <div class="detail-image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+        </div>
+        
+        <div class="detail-info">
+            <h2 class="detail-name" id="detail-name">戴森 V15 Detect 无绳吸尘器</h2>
+            <div class="detail-price">¥4,990 <span class="detail-price-old">¥5,990</span></div>
+            <div class="detail-tags">
+                <span class="detail-tag">直降1000</span>
+                <span class="detail-tag">30天保价</span>
+            </div>
+            <p class="detail-desc">
+                戴森V15 Detect是戴森迄今为止最强大的无绳吸尘器。配备激光探测技术，可以看见肉眼不可见的微尘。智能LCD屏幕实时显示吸尘数据，自动调节吸力大小。
+            </p>
+            
+            <div class="detail-section">
+                <div class="detail-section-title">价格走势</div>
+                <div class="price-history">
+                    <div class="price-trend">
+                        <div class="price-trend-value">↓17%</div>
+                        <div class="price-trend-label">较30日前</div>
+                    </div>
+                    <div style="flex:1; height:60px; background: var(--bg-primary); border-radius: 8px; display:flex; align-items:center; justify-content:center; color: var(--text-tertiary); font-size:12px;">
+                        价格趋势图
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="detail-actions">
+            <div class="detail-btn secondary" onclick="showToast('已加入价格监控')">价格监控</div>
+            <div class="detail-btn primary" onclick="showToast('已加入购物车')">加入购物车</div>
+        </div>
+    </div>
+    
+    <!-- ========== 家人档案页 ========== -->
+    <div id="page-family" class="page">
+        <div class="status-bar">
+            <div class="back-btn" onclick="goBack()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </div>
+            <span class="status-time" style="flex:1; text-align:center; font-weight:600;">家人档案</span>
+            <div style="width:36px;"></div>
+        </div>
+        
+        <div class="family-members">
+            <div class="family-member" onclick="showToast('已选择老婆的购物偏好')">
+                <div class="member-avatar" style="background: var(--accent-pink-light, #fce4ec);">
+                    👩
+                </div>
+                <div class="member-info">
+                    <div class="member-name">老婆</div>
+                    <div class="member-desc">喜欢护肤、美妆类产品</div>
+                    <div class="member-tags">
+                        <span class="member-tag">护肤</span>
+                        <span class="member-tag">美妆</span>
+                        <span class="member-tag">香薰</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="family-member" onclick="showToast('已选择儿子的购物偏好')">
+                <div class="member-avatar" style="background: var(--accent-blue-light);">
+                    👦
+                </div>
+                <div class="member-info">
+                    <div class="member-name">儿子</div>
+                    <div class="member-desc">喜欢玩具、绘本、零食</div>
+                    <div class="member-tags">
+                        <span class="member-tag">玩具</span>
+                        <span class="member-tag">绘本</span>
+                        <span class="member-tag">零食</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="family-member" onclick="showToast('已选择老妈的购物偏好')">
+                <div class="member-avatar" style="background: var(--accent-green-light);">
+                    👵
+                </div>
+                <div class="member-info">
+                    <div class="member-name">老妈</div>
+                    <div class="member-desc">喜欢保健品、家居用品</div>
+                    <div class="member-tags">
+                        <span class="member-tag">保健</span>
+                        <span class="member-tag">家居</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="add-member" onclick="showToast('添加家人功能开发中')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>添加家人</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== 价格监控页 ========== -->
+    <div id="page-monitor" class="page">
+        <div class="status-bar">
+            <div class="back-btn" onclick="goBack()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </div>
+            <span class="status-time" style="flex:1; text-align:center; font-weight:600;">价格监控</span>
+            <div style="width:36px;"></div>
+        </div>
+        
+        <div class="monitor-list">
+            <div class="monitor-item" onclick="navigateTo('detail')">
+                <div class="monitor-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                </div>
+                <div class="monitor-info">
+                    <div class="monitor-name">茅台飞天53度 500ml</div>
+                    <div class="monitor-price">
+                        <span class="monitor-current">¥1,499</span>
+                        <span class="monitor-target">目标价 ¥1,299</span>
+                    </div>
+                    <div class="monitor-status">
+                        <div class="status-dot watching"></div>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <span>监控中 · 较昨日持平</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="monitor-item" onclick="navigateTo('detail')">
+                <div class="monitor-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                </div>
+                <div class="monitor-info">
+                    <div class="monitor-name">戴森V15吸尘器</div>
+                    <div class="monitor-price">
+                        <span class="monitor-current">¥4,990</span>
+                        <span class="monitor-target">目标价 ¥4,500</span>
+                    </div>
+                    <div class="monitor-status">
+                        <div class="status-dot alert"></div>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-red)" stroke-width="2">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                        </svg>
+                        <span style="color: var(--accent-red);">已达目标价！</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="monitor-item" onclick="navigateTo('detail')">
+                <div class="monitor-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                </div>
+                <div class="monitor-info">
+                    <div class="monitor-name">Apple AirPods Pro 2</div>
+                    <div class="monitor-price">
+                        <span class="monitor-current">¥1,799</span>
+                        <span class="monitor-target">目标价 ¥1,599</span>
+                    </div>
+                    <div class="monitor-status">
+                        <div class="status-dot watching"></div>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                        </svg>
+                        <span>监控中 · 较昨日降200</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== 企业版欢迎页 ========== -->
+    <div id="page-enterprise-home" class="page">
+        <div class="status-bar">
+            <span class="status-time">09:41</span>
+            <div class="status-icons">
+                <div class="status-version enterprise" onclick="showVersionMenu(event)">
+                    <span>企业版</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                    <div id="version-menu-enterprise" class="dropdown-menu">
+                        <div class="dropdown-item" onclick="switchVersion('personal')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span>个人版</span>
+                        </div>
+                        <div class="dropdown-item" onclick="switchVersion('enterprise')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                            <span>企业版</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="enterprise-header">
+            <h1>你好，靑枫 👋</h1>
+            <p>公司采购，省心省钱</p>
+        </div>
+        
+        <div class="company-info">
+            <div class="company-logo">QF</div>
+            <div class="company-detail">
+                <h3>青枫科技有限公司</h3>
+                <p>本月已省 ¥12,580 · 采购订单 28 笔</p>
+            </div>
+        </div>
+        
+        <div class="quick-actions">
+            <div class="quick-action" onclick="navigateTo('import')">
+                <div class="quick-action-icon" style="background: var(--accent-blue-light);">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                </div>
+                <span class="quick-action-label">导入订单</span>
+            </div>
+            <div class="quick-action" onclick="navigateTo('replenish')">
+                <div class="quick-action-icon" style="background: var(--accent-green-light);">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                    </svg>
+                </div>
+                <span class="quick-action-label">智能补货</span>
+            </div>
+            <div class="quick-action" onclick="navigateTo('invoice')">
+                <div class="quick-action-icon" style="background: var(--accent-yellow-light);">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-yellow)" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                </div>
+                <span class="quick-action-label">发票管理</span>
+            </div>
+            <div class="quick-action" onclick="navigateTo('analytics')">
+                <div class="quick-action-icon" style="background: var(--accent-purple-light);">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-purple)" stroke-width="2">
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                </div>
+                <span class="quick-action-label">数据分析</span>
+            </div>
+        </div>
+        
+        <div class="feature-cards">
+            <div class="feature-card green" onclick="navigateTo('festival')">
+                <div class="feature-card-title">🎋 端午节员工福利</div>
+                <div class="feature-card-desc">精选福利商品，员工专属85折</div>
+                <span class="feature-card-tag">团购活动</span>
+            </div>
+        </div>
+        
+        <div class="recent-section">
+            <div class="section-header">
+                <span class="section-title">待处理事项</span>
+            </div>
+            <div style="padding: 16px; background: var(--bg-secondary); border-radius: 12px; margin-bottom: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-size: 14px; font-weight: 500;">补货提醒</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">3件商品库存不足</div>
+                    </div>
+                    <div style="padding: 6px 12px; background: var(--accent-red); color: white; border-radius: 12px; font-size: 12px;">待处理</div>
+                </div>
+            </div>
+            <div style="padding: 16px; background: var(--bg-secondary); border-radius: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-size: 14px; font-weight: 500;">发票待开</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">5笔订单需要开票</div>
+                    </div>
+                    <div style="padding: 6px 12px; background: var(--accent-yellow); color: white; border-radius: 12px; font-size: 12px;">处理中</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-bar">
+            <div class="tab-item active" onclick="navigateTo('enterprise-home')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>首页</span>
+            </div>
+            <div class="tab-item" onclick="navigateTo('analytics')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+                <span>数据</span>
+            </div>
+            <div class="tab-item" onclick="navigateTo('chat')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span>对话</span>
+            </div>
+            <div class="tab-item" onclick="showToast('设置页面开发中')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+                <span>设置</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== 订单导入页 ========== -->
+    <div id="page-import" class="page">
+        <div class="status-bar">
+            <div class="back-btn" onclick="goBack()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </div>
+            <span class="status-time" style="flex:1; text-align:center; font-weight:600;">批量导入</span>
+            <div style="width:36px;"></div>
+        </div>
+        
+        <div class="import-area">
+            <div class="import-box" onclick="showToast('文件选择器已打开')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                <h3>上传订单文件</h3>
+                <p>支持 Excel、CSV 格式</p>
+            </div>
+            
+            <div class="import-tips">
+                <h4>💡 导入说明</h4>
+                <p>
+                    1. 从淘宝/京东导出订单Excel<br>
+                    2. 点击上方区域上传文件<br>
+                    3. 系统自动识别并比价<br>
+                    4. 一键生成节省报告
+                </p>
+            </div>
+            
+            <div style="margin-top: 24px;">
+                <div class="section-title" style="margin-bottom: 12px;">历史导入</div>
+                <div style="padding: 16px; background: var(--bg-secondary); border-radius: 12px; margin-bottom: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-size: 14px; font-weight: 500;">2024年5月采购订单.xlsx</div>
+                            <div style="font-size: 12px; color: var(--text-secondary);">28笔订单 · 节省 ¥12,580</div>
+                        </div>
+                        <div style="font-size: 12px; color: var(--text-tertiary);">3天前</div>
+                    </div>
+                </div>
+                <div style="padding: 16px; background: var(--bg-secondary); border-radius: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-size: 14px; font-weight: 500;">2024年4月采购订单.xlsx</div>
+                            <div style="font-size: 12px; color: var(--text-secondary);">35笔订单 · 节省 ¥8,920</div>
+                        </div>
+                        <div style="font-size: 12px; color: var(--text-tertiary);">1个月前</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== 智能补货页 ========== -->
+    <div id="page-replenish" class="page">
+        <div class="status-bar">
+            <div class="back-btn" onclick="goBack()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </div>
+            <span class="status-time" style="flex:1; text-align:center; font-weight:600;">智能补货</span>
+            <div style="width:36px;"></div>
+        </div>
+        
+        <div class="replenish-list">
+            <div class="replenish-item">
+                <div class="replenish-header-row">
+                    <div class="replenish-product">
+                        <div class="replenish-product-image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <polyline points="21 15 16 10 5 21"></polyline>
+                            </svg>
+                        </div>
+                        <div class="replenish-product-name">办公室咖啡胶囊</div>
+                    </div>
+                    <div class="replenish-urgency high">紧急</div>
+                </div>
+                <div class="replenish-stats">
+                    <div class="replenish-stat">
+                        <div class="replenish-stat-value">12</div>
+                        <div class="replenish-stat-label">当前库存</div>
+                    </div>
+                    <div class="replenish-stat">
+                        <div class="replenish-stat-value">50</div>
+                        <div class="replenish-stat-label">建议库存</div>
+                    </div>
+                    <div class="replenish-stat">
+                        <div class="replenish-stat-value">7天</div>
+                        <div class="replenish-stat-label">预计耗尽</div>
+                    </div>
+                </div>
+                <div class="replenish-action">
+                    <div class="replenish-btn secondary" onclick="showToast('已稍后提醒')">稍后提醒</div>
+                    <div class="replenish-btn primary" onclick="showToast('已发起采购申请')">立即采购</div>
+                </div>
+            </div>
+            
+            <div class="replenish-item">
+                <div class="replenish-header-row">
+                    <div class="replenish-product">
+                        <div class="replenish-product-image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <polyline points="21 15 16 10 5 21"></polyline>
+                            </svg>
+                        </div>
+                        <div class="replenish-product-name">打印纸 A4</div>
+                    </div>
+                    <div class="replenish-urgency medium">关注</div>
+                </div>
+                <div class="replenish-stats">
+                    <div class="replenish-stat">
+                        <div class="replenish-stat-value">8</div>
+                        <div class="replenish-stat-label">当前库存</div>
+                    </div>
+                    <div class="replenish-stat">
+                        <div class="replenish-stat-value">20</div>
+                        <div class="replenish-stat-label">建议库存</div>
+                    </div>
+                    <div class="replenish-stat">
+                        <div class="replenish-stat-value">14天</div>
+                        <div class="replenish-stat-label">预计耗尽</div>
+                    </div>
+                </div>
+                <div class="replenish-action">
+                    <div class="replenish-btn secondary" onclick="showToast('已稍后提醒')">稍后提醒</div>
+                    <div class="replenish-btn primary" onclick="showToast('已发起采购申请')">立即采购</div>
+                </div>
+            </div>
+            
+            <div class="replenish-item">
+                <div class="replenish-header-row">
+                    <div class="replenish-product">
+                        <div class="replenish-product-image">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <polyline points="21 15 16 10 5 21"></polyline>
+                            </svg>
+                        </div>
+                        <div class="replenish-product-name">矿泉水 5L装</div>
+                    </div>
+                    <div class="replenish-urgency medium">关注</div>
+                </div>
+                <div class="replenish-stats">
+                    <div class="replenish-stat">
+                        <div class="replenish-stat-value">15</div>
+                        <div class="replenish-stat-label">当前库存</div>
+                    </div>
+                    <div class="replenish-stat">
+                        <div class="replenish-stat-value">40</div>
+                        <div class="replenish-stat-label">建议库存</div>
+                    </div>
+                    <div class="replenish-stat">
+                        <div class="replenish-stat-value">21天</div>
+                        <div class="replenish-stat-label">预计耗尽</div>
+                    </div>
+                </div>
+                <div class="replenish-action">
+                    <div class="replenish-btn secondary" onclick="showToast('已稍后提醒')">稍后提醒</div>
+                    <div class="replenish-btn primary" onclick="showToast('已发起采购申请')">立即采购</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== 发票管理页 ========== -->
+    <div id="page-invoice" class="page">
+        <div class="status-bar">
+            <div class="back-btn" onclick="goBack()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </div>
+            <span class="status-time" style="flex:1; text-align:center; font-weight:600;">发票抬头</span>
+            <div style="width:36px;"></div>
+        </div>
+        
+        <div class="invoice-list">
+            <div class="invoice-item">
+                <div class="invoice-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                </div>
+                <div class="invoice-info">
+                    <div class="invoice-name">青枫科技有限公司</div>
+                    <div class="invoice-default">默认</div>
+                </div>
+            </div>
+            
+            <div class="invoice-item">
+                <div class="invoice-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                </div>
+                <div class="invoice-info">
+                    <div class="invoice-name">杭州分公司</div>
+                </div>
+            </div>
+            
+            <div class="invoice-item">
+                <div class="invoice-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                </div>
+                <div class="invoice-info">
+                    <div class="invoice-name">上海研发中心</div>
+                </div>
+            </div>
+            
+            <div class="add-invoice" onclick="showToast('添加发票抬头功能开发中')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>添加发票抬头</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== 端午福利页 ========== -->
+    <div id="page-festival" class="page">
+        <div class="status-bar">
+            <div class="back-btn" onclick="goBack()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </div>
+            <span class="status-time" style="flex:1; text-align:center; font-weight:600;">端午福利</span>
+            <div style="width:36px;"></div>
+        </div>
+        
+        <div class="festival-header">
+            <h1>🎋 端午节员工福利</h1>
+            <p>精选好物 · 员工专享85折</p>
+            <span class="festival-badge">企业团购活动</span>
+        </div>
+        
+        <div class="festival-products">
+            <div class="festival-product" onclick="navigateTo('detail')">
+                <div class="festival-product-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                </div>
+                <div class="festival-product-info">
+                    <div class="festival-product-name">五芳斋粽子礼盒</div>
+                    <div class="festival-product-desc">蛋黄鲜肉粽 10只装</div>
+                    <div class="festival-product-price">
+                        <span class="festival-product-current">¥168</span>
+                        <span class="festival-product-discount">85折 · 省¥30</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="festival-product" onclick="navigateTo('detail')">
+                <div class="festival-product-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                </div>
+                <div class="festival-product-info">
+                    <div class="festival-product-name">三只松鼠坚果礼盒</div>
+                    <div class="festival-product-desc">每日坚果 30包</div>
+                    <div class="festival-product-price">
+                        <span class="festival-product-current">¥128</span>
+                        <span class="festival-product-discount">85折 · 省¥22</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="festival-product" onclick="navigateTo('detail')">
+                <div class="festival-product-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                </div>
+                <div class="festival-product-info">
+                    <div class="festival-product-name">稻香村糕点礼盒</div>
+                    <div class="festival-product-desc">传统糕点 12件装</div>
+                    <div class="festival-product-price">
+                        <span class="festival-product-current">¥98</span>
+                        <span class="festival-product-discount">85折 · 省¥17</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="festival-product" onclick="navigateTo('detail')">
+                <div class="festival-product-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                </div>
+                <div class="festival-product-info">
+                    <div class="festival-product-name">阳澄湖大闸蟹礼券</div>
+                    <div class="festival-product-desc">8只装 · 可预约配送</div>
+                    <div class="festival-product-price">
+                        <span class="festival-product-current">¥388</span>
+                        <span class="festival-product-discount">85折 · 省¥68</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="detail-actions">
+            <div class="detail-btn primary" onclick="showToast('已发起团购申请')">发起团购</div>
+        </div>
+    </div>
+    
+    <!-- ========== 数据分析页 ========== -->
+    <div id="page-analytics" class="page">
+        <div class="status-bar">
+            <div class="back-btn" onclick="goBack()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </div>
+            <span class="status-time" style="flex:1; text-align:center; font-weight:600;">采购分析</span>
+            <div style="width:36px;"></div>
+        </div>
+        
+        <div class="analytics-summary">
+            <div class="summary-card highlight">
+                <div class="summary-value">¥128,450</div>
+                <div class="summary-label">本月采购额</div>
+                <div class="summary-trend">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                        <polyline points="17 6 23 6 23 12"></polyline>
+                    </svg>
+                    较上月 +12%
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-value" style="color: var(--accent-green);">¥12,580</div>
+                <div class="summary-label">本月节省</div>
+                <div class="summary-trend up">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                        <polyline points="17 6 23 6 23 12"></polyline>
+                    </svg>
+                    较上月 +23%
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-value">28</div>
+                <div class="summary-label">采购订单</div>
+                <div class="summary-trend down">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;">
+                        <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
+                        <polyline points="17 18 23 18 23 12"></polyline>
+                    </svg>
+                    较上月 -5%
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-value">98%</div>
+                <div class="summary-label">准时率</div>
+                <div class="summary-trend up">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                        <polyline points="17 6 23 6 23 12"></polyline>
+                    </svg>
+                    较上月 +2%
+                </div>
+            </div>
+        </div>
+        
+        <div class="analytics-section">
+            <div class="analytics-section-title">采购趋势</div>
+            <div class="chart-placeholder">
+                📊 月度采购趋势图
+            </div>
+        </div>
+        
+        <div class="analytics-section">
+            <div class="analytics-section-title">品类分布</div>
+            <div class="chart-placeholder">
+                🥧 采购品类饼图
+            </div>
+        </div>
+        
+        <div class="analytics-section" style="padding-bottom: 100px;">
+            <div class="analytics-section-title">供应商评估</div>
+            <div style="padding: 16px; background: var(--bg-secondary); border-radius: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="font-weight: 500;">京东自营</div>
+                        <span style="color: var(--accent-yellow);">★★★★★</span>
+                    </div>
+                    <div style="font-size: 12px; color: var(--text-secondary);">占比 45%</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="font-weight: 500;">天猫超市</div>
+                        <span style="color: var(--accent-yellow);">★★★★☆</span>
+                    </div>
+                    <div style="font-size: 12px; color: var(--text-secondary);">占比 32%</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <div style="font-weight: 500;">苏宁易购</div>
+                        <span style="color: var(--accent-yellow);">★★★★☆</span>
+                    </div>
+                    <div style="font-size: 12px; color: var(--text-secondary);">占比 23%</div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 12px;">
+                <span style="font-size: 13px; color: var(--accent-blue); cursor: pointer;" onclick="navigateTo('supplier')">查看供应商详情 →</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== 供应商评估页 ========== -->
+    <div id="page-supplier" class="page">
+        <div class="status-bar">
+            <div class="back-btn" onclick="goBack()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </div>
+            <span class="status-time" style="flex:1; text-align:center; font-weight:600;">供应商评估</span>
+            <div style="width:36px;"></div>
+        </div>
+        
+        <div class="supplier-list">
+            <div class="supplier-item">
+                <div class="supplier-header-row">
+                    <div class="supplier-name">京东自营</div>
+                    <div class="supplier-rating">
+                        <span class="supplier-stars">★★★★★</span>
+                        <span class="supplier-score">4.9分</span>
+                    </div>
+                </div>
+                <div class="supplier-metrics">
+                    <div class="supplier-metric">
+                        <div class="supplier-metric-value" style="color: var(--accent-green);">98%</div>
+                        <div class="supplier-metric-label">准时率</div>
+                    </div>
+                    <div class="supplier-metric">
+                        <div class="supplier-metric-value">¥58K</div>
+                        <div class="supplier-metric-label">月采购额</div>
+                    </div>
+                    <div class="supplier-metric">
+                        <div class="supplier-metric-value" style="color: var(--accent-green);">12%</div>
+                        <div class="supplier-metric-label">节省比例</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="supplier-item">
+                <div class="supplier-header-row">
+                    <div class="supplier-name">天猫超市</div>
+                    <div class="supplier-rating">
+                        <span class="supplier-stars">★★★★☆</span>
+                        <span class="supplier-score">4.6分</span>
+                    </div>
+                </div>
+                <div class="supplier-metrics">
+                    <div class="supplier-metric">
+                        <div class="supplier-metric-value" style="color: var(--accent-green);">95%</div>
+                        <div class="supplier-metric-label">准时率</div>
+                    </div>
+                    <div class="supplier-metric">
+                        <div class="supplier-metric-value">¥41K</div>
+                        <div class="supplier-metric-label">月采购额</div>
+                    </div>
+                    <div class="supplier-metric">
+                        <div class="supplier-metric-value" style="color: var(--accent-green);">8%</div>
+                        <div class="supplier-metric-label">节省比例</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="supplier-item">
+                <div class="supplier-header-row">
+                    <div class="supplier-name">苏宁易购</div>
+                    <div class="supplier-rating">
+                        <span class="supplier-stars">★★★★☆</span>
+                        <span class="supplier-score">4.4分</span>
+                    </div>
+                </div>
+                <div class="supplier-metrics">
+                    <div class="supplier-metric">
+                        <div class="supplier-metric-value" style="color: var(--accent-yellow);">92%</div>
+                        <div class="supplier-metric-label">准时率</div>
+                    </div>
+                    <div class="supplier-metric">
+                        <div class="supplier-metric-value">¥29K</div>
+                        <div class="supplier-metric-label">月采购额</div>
+                    </div>
+                    <div class="supplier-metric">
+                        <div class="supplier-metric-value" style="color: var(--accent-green);">6%</div>
+                        <div class="supplier-metric-label">节省比例</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 页面导航历史
+        const pageHistory = [];
+        let currentPage = 'home';
+        let currentVersion = 'personal';
+        
+        // Mock商品数据
+        const products = [
+            { id: 1, name: '戴森 V15 吸尘器', price: 4990, oldPrice: 5990, category: 'electronics', desc: '最新款激光探测吸尘器' },
+            { id: 2, name: 'Apple AirPods Pro 2', price: 1799, oldPrice: 1999, category: 'electronics', desc: '主动降噪，空间音频' },
+            { id: 3, name: '茅台飞天53度', price: 1499, oldPrice: 1699, category: 'food', desc: '贵州茅台酒 500ml' },
+            { id: 4, name: 'Godiva 巧克力礼盒', price: 398, oldPrice: 498, category: 'gift', desc: '比利时进口巧克力' },
+            { id: 5, name: '海尔冰箱 BCD-500', price: 4599, oldPrice: 5299, category: 'home', desc: '500L对开门智能冰箱' },
+            { id: 6, name: '雅培血糖仪', price: 299, oldPrice: 399, category: 'home', desc: '精准血糖监测套装' },
+            { id: 7, name: '五芳斋粽子礼盒', price: 168, oldPrice: 198, category: 'food', desc: '端午传统美食' },
+            { id: 8, name: '戴森吹风机 HD08', price: 3190, oldPrice: 3690, category: 'electronics', desc: '智能温控护发' },
+        ];
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts('all');
+        });
+        
+        // 页面导航
+        function navigateTo(pageId) {
+            if (currentPage !== pageId) {
+                pageHistory.push(currentPage);
+            }
+            currentPage = pageId;
+            
+            // 隐藏所有页面
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // 显示目标页面
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                window.scrollTo(0, 0);
+            }
+        }
+        
+        function goBack() {
+            if (pageHistory.length > 0) {
+                const prevPage = pageHistory.pop();
+                currentPage = prevPage;
+                
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                document.getElementById('page-' + prevPage).classList.add('active');
+                window.scrollTo(0, 0);
+            }
+        }
+        
+        // 版本切换
+        function showVersionMenu(event) {
+            event.stopPropagation();
+            const menu = event.currentTarget.querySelector('.dropdown-menu');
+            document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
+            menu.classList.toggle('show');
+        }
+        
+        function switchVersion(version) {
+            currentVersion = version;
+            document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
+            
+            if (version === 'personal') {
+                navigateTo('home');
+            } else {
+                navigateTo('enterprise-home');
+            }
+        }
+        
+        // 点击其他区域关闭下拉菜单
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
+        });
+        
+        // Toast提示
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+        
+        // 聊天功能
+        const chatResponses = {
+            '推荐一些母亲节礼物': '为您推荐几款热门母亲节礼物：\n\n1. SK-II神仙水礼盒 - ¥1,540\n   热门护肤套装，妈妈最爱\n\n2. 戴森吹风机 - ¥3,190\n   护发黑科技，贴心好礼\n\n3. 雅诗兰黛小棕瓶 - ¥760\n   经典护肤，适合送妈妈\n\n需要我详细介绍哪款吗？',
+            '帮我找一款性价比高的吸尘器': '好的！我为您找到了几款高性价比吸尘器：\n\n推荐 戴森V15 Detect 💡\n当前价格 ¥4,990（直降¥1,000）\n• 激光探测技术\n• 智能吸力调节\n• 30天保价\n\n这款非常适合您家的清洁需求，现在入手很划算！需要帮您监控价格吗？',
+            '监控茅台价格变动': '已为您添加价格监控！\n\n📦 茅台飞天53度 500ml\n当前价格：¥1,499\n目标价格：¥1,299\n监控状态：已开启\n\n当价格达到目标时会第一时间通知您！'
+        };
+        
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // 添加用户消息
+            addMessage(message, 'user');
+            input.value = '';
+            
+            // 显示加载状态
+            const loadingId = addLoadingMessage();
+            
+            // 模拟AI回复
+            setTimeout(() => {
+                removeMessage(loadingId);
+                
+                const response = chatResponses[message] || `收到您的消息："${message}"\n\n我正在思考如何帮您找到最合适的商品，请稍等...`;
+                addMessage(response, 'bot');
+                
+                // 有时添加商品卡片
+                if (message.includes('吸尘器')) {
+                    setTimeout(() => {
+                        addProductCard();
+                    }, 500);
+                }
+            }, 1000);
+        }
+        
+        function sendSuggestion(text) {
+            document.getElementById('chat-input').value = text;
+            sendMessage();
+        }
+        
+        function addMessage(text, type) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message ' + type;
+            messageDiv.innerHTML = `
+                <div class="message-avatar">
+                    ${type === 'user' ? `
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    ` : `
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    `}
+                </div>
+                <div class="message-content">
+                    <div class="message-bubble">${text.replace(/\n/g, '<br>')}</div>
+                    <div class="message-time">${new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}</div>
+                </div>
+            `;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        function addLoadingMessage() {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            messageDiv.id = 'loading-message';
+            messageDiv.innerHTML = `
+                <div class="message-avatar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <div class="message-content">
+                    <div class="message-bubble">
+                        <div class="loading-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            return 'loading-message';
+        }
+        
+        function removeMessage(id) {
+            const message = document.getElementById(id);
+            if (message) {
+                message.remove();
+            }
+        }
+        
+        function addProductCard() {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            messageDiv.innerHTML = `
+                <div class="message-avatar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <div class="message-content">
+                    <div class="message-bubble">
+                        为您找到这款商品：
+                        <div class="message-product" onclick="navigateTo('detail')">
+                            <div class="message-product-image">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                    <polyline points="21 15 16 10 5 21"></polyline>
+                                </svg>
+                            </div>
+                            <div class="message-product-info">
+                                <div class="message-product-name">戴森 V15 Detect</div>
+                                <div class="message-product-desc">激光探测，智能清洁</div>
+                                <div class="message-product-price">¥4,990</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        // 商品列表功能
+        function renderProducts(category) {
+            const grid = document.getElementById('product-grid');
+            const filteredProducts = category === 'all' 
+                ? products 
+                : products.filter(p => p.category === category);
+            
+            grid.innerHTML = filteredProducts.map(product => `
+                <div class="product-card" onclick="viewProduct(${product.id})">
+                    <div class="product-image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-price">¥${product.price.toLocaleString()} <span class="product-price-old">¥${product.oldPrice.toLocaleString()}</span></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function selectFilter(element, category) {
+            document.querySelectorAll('.filter-tag').forEach(tag => tag.classList.remove('active'));
+            element.classList.add('active');
+            renderProducts(category);
+        }
+        
+        function filterProducts() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const grid = document.getElementById('product-grid');
+            
+            const filteredProducts = products.filter(p => 
+                p.name.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query)
+            );
+            
+            grid.innerHTML = filteredProducts.map(product => `
+                <div class="product-card" onclick="viewProduct(${product.id})">
+                    <div class="product-image">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-price">¥${product.price.toLocaleString()} <span class="product-price-old">¥${product.oldPrice.toLocaleString()}</span></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function viewProduct(id) {
+            const product = products.find(p => p.id === id);
+            if (product) {
+                document.getElementById('detail-name').textContent = product.name;
+            }
+            navigateTo('detail');
+        }
+    </script>
+</body>
+</html>
