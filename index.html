@@ -428,6 +428,23 @@
             stroke: var(--accent-green);
         }
         
+        .reminder-card.festival {
+            background: linear-gradient(135deg, #fff5e6, #ffe4cc);
+            border: 1px solid #ffc966;
+        }
+        
+        .reminder-card.festival .reminder-icon.festival-icon {
+            background: var(--accent-orange-light);
+        }
+        
+        .reminder-card.festival .reminder-icon.festival-icon svg {
+            stroke: var(--accent-orange);
+        }
+        
+        .reminder-card.festival .reminder-title {
+            color: var(--accent-orange);
+        }
+        
         .reminder-card.enterprise .reminder-icon {
             background: var(--accent-purple-light);
         }
@@ -1451,6 +1468,88 @@
             color: var(--accent-green);
         }
         
+        .festival-product-badges {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+        }
+        
+        .festival-badge-item {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .festival-badge-item.hot {
+            background: var(--accent-red-light);
+            color: var(--accent-red);
+        }
+        
+        .festival-badge-item.stock {
+            background: var(--accent-green-light);
+            color: var(--accent-green);
+        }
+        
+        /* 团购优势说明 */
+        .festival-advantages {
+            padding: 16px 20px;
+            background: var(--bg-secondary);
+            margin-top: 16px;
+        }
+        
+        .festival-adv-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+        
+        .festival-adv-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .festival-adv-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        
+        .festival-adv-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--accent-orange-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .festival-adv-icon svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--accent-orange);
+        }
+        
+        .festival-adv-text {
+            flex: 1;
+        }
+        
+        .festival-adv-title-text {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: block;
+        }
+        
+        .festival-adv-desc-text {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            display: block;
+            margin-top: 2px;
+        }
+        
         /* 数据分析页 */
         .analytics-header {
             padding: 24px 20px 16px;
@@ -2243,6 +2342,49 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- 团购优势说明 -->
+            <div class="festival-advantages">
+                <h3 class="festival-adv-title">🎉 团购优势</h3>
+                <div class="festival-adv-list">
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">批量采购享专属折扣</span>
+                            <span class="festival-adv-desc-text">最低85折，量大更优</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">统一开票便捷报销</span>
+                            <span class="festival-adv-desc-text">发票抬头自动匹配</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">专人对接定制服务</span>
+                            <span class="festival-adv-desc-text">支持企业Logo定制</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">配送时间灵活协商</span>
+                            <span class="festival-adv-desc-text">可指定日期送货</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="input-bar">
@@ -2275,6 +2417,49 @@
             <div class="chat-content" id="chat-messages">
                 <div class="chat-date">今天</div>
                 <div class="chat-message assistant">你好！我是你的购物小管家，有什么可以帮你的？</div>
+            </div>
+            
+            <!-- 团购优势说明 -->
+            <div class="festival-advantages">
+                <h3 class="festival-adv-title">🎉 团购优势</h3>
+                <div class="festival-adv-list">
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">批量采购享专属折扣</span>
+                            <span class="festival-adv-desc-text">最低85折，量大更优</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">统一开票便捷报销</span>
+                            <span class="festival-adv-desc-text">发票抬头自动匹配</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">专人对接定制服务</span>
+                            <span class="festival-adv-desc-text">支持企业Logo定制</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">配送时间灵活协商</span>
+                            <span class="festival-adv-desc-text">可指定日期送货</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -2360,6 +2545,49 @@
                     <span>添加家人</span>
                 </div>
             </div>
+            
+            <!-- 团购优势说明 -->
+            <div class="festival-advantages">
+                <h3 class="festival-adv-title">🎉 团购优势</h3>
+                <div class="festival-adv-list">
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">批量采购享专属折扣</span>
+                            <span class="festival-adv-desc-text">最低85折，量大更优</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">统一开票便捷报销</span>
+                            <span class="festival-adv-desc-text">发票抬头自动匹配</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">专人对接定制服务</span>
+                            <span class="festival-adv-desc-text">支持企业Logo定制</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">配送时间灵活协商</span>
+                            <span class="festival-adv-desc-text">可指定日期送货</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="input-bar">
@@ -2438,6 +2666,49 @@
                         <div class="monitor-status">
                             <div class="monitor-dot active"></div>
                             <span>监控中 · 较昨日降200</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 团购优势说明 -->
+            <div class="festival-advantages">
+                <h3 class="festival-adv-title">🎉 团购优势</h3>
+                <div class="festival-adv-list">
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">批量采购享专属折扣</span>
+                            <span class="festival-adv-desc-text">最低85折，量大更优</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">统一开票便捷报销</span>
+                            <span class="festival-adv-desc-text">发票抬头自动匹配</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">专人对接定制服务</span>
+                            <span class="festival-adv-desc-text">支持企业Logo定制</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">配送时间灵活协商</span>
+                            <span class="festival-adv-desc-text">可指定日期送货</span>
                         </div>
                     </div>
                 </div>
@@ -2678,6 +2949,19 @@
                 <p class="welcome-subtitle">批量采购 · 成本优化 · 智能决策</p>
                 
                 <div class="reminder-cards">
+                    <!-- 端午节福利提醒 -->
+                    <div class="reminder-card festival" onclick="navigateTo('festival')">
+                        <div class="reminder-icon festival-icon">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        </div>
+                        <div class="reminder-content">
+                            <div class="reminder-title">端午节员工福利</div>
+                            <div class="reminder-sub">团购价低至 85折 · 限时特惠</div>
+                        </div>
+                        <div class="reminder-arrow">
+                            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                        </div>
+                    </div>
                     <div class="reminder-card enterprise" onclick="navigateTo('replenish')">
                         <div class="reminder-icon">
                             <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
@@ -2712,6 +2996,49 @@
                         </div>
                         <div class="reminder-arrow">
                             <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 团购优势说明 -->
+            <div class="festival-advantages">
+                <h3 class="festival-adv-title">🎉 团购优势</h3>
+                <div class="festival-adv-list">
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">批量采购享专属折扣</span>
+                            <span class="festival-adv-desc-text">最低85折，量大更优</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">统一开票便捷报销</span>
+                            <span class="festival-adv-desc-text">发票抬头自动匹配</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">专人对接定制服务</span>
+                            <span class="festival-adv-desc-text">支持企业Logo定制</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">配送时间灵活协商</span>
+                            <span class="festival-adv-desc-text">可指定日期送货</span>
                         </div>
                     </div>
                 </div>
@@ -2927,6 +3254,49 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- 团购优势说明 -->
+            <div class="festival-advantages">
+                <h3 class="festival-adv-title">🎉 团购优势</h3>
+                <div class="festival-adv-list">
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">批量采购享专属折扣</span>
+                            <span class="festival-adv-desc-text">最低85折，量大更优</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">统一开票便捷报销</span>
+                            <span class="festival-adv-desc-text">发票抬头自动匹配</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">专人对接定制服务</span>
+                            <span class="festival-adv-desc-text">支持企业Logo定制</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">配送时间灵活协商</span>
+                            <span class="festival-adv-desc-text">可指定日期送货</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="input-bar">
@@ -3013,6 +3383,49 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- 团购优势说明 -->
+            <div class="festival-advantages">
+                <h3 class="festival-adv-title">🎉 团购优势</h3>
+                <div class="festival-adv-list">
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">批量采购享专属折扣</span>
+                            <span class="festival-adv-desc-text">最低85折，量大更优</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">统一开票便捷报销</span>
+                            <span class="festival-adv-desc-text">发票抬头自动匹配</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">专人对接定制服务</span>
+                            <span class="festival-adv-desc-text">支持企业Logo定制</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">配送时间灵活协商</span>
+                            <span class="festival-adv-desc-text">可指定日期送货</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="input-bar">
@@ -3077,6 +3490,49 @@
                     <span>添加发票抬头</span>
                 </div>
             </div>
+            
+            <!-- 团购优势说明 -->
+            <div class="festival-advantages">
+                <h3 class="festival-adv-title">🎉 团购优势</h3>
+                <div class="festival-adv-list">
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">批量采购享专属折扣</span>
+                            <span class="festival-adv-desc-text">最低85折，量大更优</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">统一开票便捷报销</span>
+                            <span class="festival-adv-desc-text">发票抬头自动匹配</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">专人对接定制服务</span>
+                            <span class="festival-adv-desc-text">支持企业Logo定制</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">配送时间灵活协商</span>
+                            <span class="festival-adv-desc-text">可指定日期送货</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="input-bar">
@@ -3110,12 +3566,16 @@
                         <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                     </div>
                     <div class="festival-product-info">
-                        <div class="festival-product-name">五芳斋粽子礼盒</div>
-                        <div class="festival-product-desc">蛋黄鲜肉粽 10只装</div>
+                        <div class="festival-product-name">五芳斋粽子礼盒 · 2kg</div>
+                        <div class="festival-product-desc">蛋黄鲜肉粽 · 传统手工 · 节日必备</div>
                         <div class="festival-product-price">
                             <span class="festival-product-current">¥168</span>
                             <span class="festival-product-discount">85折 · 省¥30</span>
                         </div>
+                        <div class="festival-product-badges">
+                            <span class="festival-badge-item hot">销量TOP1</span>
+                            <span class="festival-badge-item stock">现货直发</span>
+                        </div>
                     </div>
                 </div>
                 
@@ -3124,39 +3584,92 @@
                         <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                     </div>
                     <div class="festival-product-info">
-                        <div class="festival-product-name">三只松鼠坚果礼盒</div>
-                        <div class="festival-product-desc">每日坚果 30包</div>
+                        <div class="festival-product-name">西湖龙井茶叶礼盒 · 250g</div>
+                        <div class="festival-product-desc">明前特级 · 清香回甘 · 健康茶饮</div>
+                        <div class="festival-product-price">
+                            <span class="festival-product-current">¥268</span>
+                            <span class="festival-product-discount">85折 · 省¥47</span>
+                        </div>
+                        <div class="festival-product-badges">
+                            <span class="festival-badge-item stock">现货直发</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="festival-product" onclick="showToast('查看商品详情')">
+                    <div class="festival-product-image">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    </div>
+                    <div class="festival-product-info">
+                        <div class="festival-product-name">三只松鼠坚果礼盒 · 1.5kg</div>
+                        <div class="festival-product-desc">每日坚果 · 科学配比 · 健康零食</div>
                         <div class="festival-product-price">
                             <span class="festival-product-current">¥128</span>
-                            <span class="festival-product-discount">85折 · 省¥22</span>
+                            <span class="festival-product-discount">81折 · 省¥30</span>
+                        </div>
+                        <div class="festival-product-badges">
+                            <span class="festival-badge-item hot">销量TOP3</span>
+                            <span class="festival-badge-item stock">现货直发</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="festival-product" onclick="showToast('查看商品详情')">
                     <div class="festival-product-image">
-                        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
                     </div>
                     <div class="festival-product-info">
-                        <div class="festival-product-name">稻香村糕点礼盒</div>
-                        <div class="festival-product-desc">传统糕点 12件装</div>
+                        <div class="festival-product-name">端午定制礼包 · 粽子+香囊</div>
+                        <div class="festival-product-desc">传统特色 · 企业定制Logo · 文化传承</div>
                         <div class="festival-product-price">
-                            <span class="festival-product-current">¥98</span>
-                            <span class="festival-product-discount">85折 · 省¥17</span>
+                            <span class="festival-product-current">¥88</span>
+                            <span class="festival-product-discount">81折 · 省¥20</span>
+                        </div>
+                        <div class="festival-product-badges">
+                            <span class="festival-badge-item stock">支持定制</span>
                         </div>
                     </div>
                 </div>
-                
-                <div class="festival-product" onclick="showToast('查看商品详情')">
-                    <div class="festival-product-image">
-                        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+            
+            <!-- 团购优势说明 -->
+            <div class="festival-advantages">
+                <h3 class="festival-adv-title">🎉 团购优势</h3>
+                <div class="festival-adv-list">
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">批量采购享专属折扣</span>
+                            <span class="festival-adv-desc-text">最低85折，量大更优</span>
+                        </div>
                     </div>
-                    <div class="festival-product-info">
-                        <div class="festival-product-name">阳澄湖大闸蟹礼券</div>
-                        <div class="festival-product-desc">8只装 · 可预约配送</div>
-                        <div class="festival-product-price">
-                            <span class="festival-product-current">¥388</span>
-                            <span class="festival-product-discount">85折 · 省¥68</span>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">统一开票便捷报销</span>
+                            <span class="festival-adv-desc-text">发票抬头自动匹配</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">专人对接定制服务</span>
+                            <span class="festival-adv-desc-text">支持企业Logo定制</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">配送时间灵活协商</span>
+                            <span class="festival-adv-desc-text">可指定日期送货</span>
                         </div>
                     </div>
                 </div>
@@ -3230,6 +3743,49 @@
                 <div class="analytics-section-title">供应商评估</div>
                 <div style="text-align:center;">
                     <span style="font-size:13px; color: var(--accent-blue); cursor: pointer;" onclick="navigateTo('supplier')">查看供应商详情 →</span>
+                </div>
+            </div>
+            
+            <!-- 团购优势说明 -->
+            <div class="festival-advantages">
+                <h3 class="festival-adv-title">🎉 团购优势</h3>
+                <div class="festival-adv-list">
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">批量采购享专属折扣</span>
+                            <span class="festival-adv-desc-text">最低85折，量大更优</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">统一开票便捷报销</span>
+                            <span class="festival-adv-desc-text">发票抬头自动匹配</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">专人对接定制服务</span>
+                            <span class="festival-adv-desc-text">支持企业Logo定制</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">配送时间灵活协商</span>
+                            <span class="festival-adv-desc-text">可指定日期送货</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -3326,6 +3882,49 @@
                         <div class="supplier-metric">
                             <div class="supplier-metric-value green">6%</div>
                             <div class="supplier-metric-label">节省比例</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 团购优势说明 -->
+            <div class="festival-advantages">
+                <h3 class="festival-adv-title">🎉 团购优势</h3>
+                <div class="festival-adv-list">
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">批量采购享专属折扣</span>
+                            <span class="festival-adv-desc-text">最低85折，量大更优</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">统一开票便捷报销</span>
+                            <span class="festival-adv-desc-text">发票抬头自动匹配</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">专人对接定制服务</span>
+                            <span class="festival-adv-desc-text">支持企业Logo定制</span>
+                        </div>
+                    </div>
+                    <div class="festival-adv-item">
+                        <div class="festival-adv-icon">
+                            <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        </div>
+                        <div class="festival-adv-text">
+                            <span class="festival-adv-title-text">配送时间灵活协商</span>
+                            <span class="festival-adv-desc-text">可指定日期送货</span>
                         </div>
                     </div>
                 </div>
