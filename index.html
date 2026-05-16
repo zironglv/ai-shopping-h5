@@ -1033,102 +1033,236 @@
         }
         
         /* 订单导入页 */
-        .import-header {
-            padding: 24px 20px 16px;
-            text-align: center;
+        .import-content {
+            padding: 16px 20px;
         }
         
-        .import-title {
-            font-size: 20px;
-            font-weight: 700;
+        .import-progress {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .progress-title {
+            font-size: 14px;
+            font-weight: 600;
             color: var(--text-primary);
         }
         
-        .import-area {
-            padding: 0 16px 16px;
+        .progress-status {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
         }
         
-        .import-box {
-            border: 2px dashed var(--border-color);
-            border-radius: 8px;
-            padding: 32px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.15s ease;
+        .progress-status.success {
+            background: var(--accent-green-light);
+            color: var(--accent-green);
         }
         
-        .import-box:active {
+        .progress-bar-wrapper {
+            height: 4px;
+            background: var(--bg-tertiary);
+            border-radius: 2px;
+            margin-bottom: 8px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            border-radius: 2px;
+            background: var(--accent-green);
+        }
+        
+        .progress-bar.full {
+            width: 100%;
+        }
+        
+        .progress-stats {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .compare-results {
+            margin-bottom: 16px;
+        }
+        
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .results-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .results-save {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-green);
+        }
+        
+        .result-item {
             background: var(--bg-secondary);
-            border-color: var(--accent-blue);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
         }
         
-        .import-box-icon {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 12px;
-            background: var(--accent-blue-light);
-            border-radius: 12px;
+        .result-item.highlight {
+            background: var(--accent-green-light);
+            border: 1px solid var(--accent-green);
+        }
+        
+        .result-product {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .product-thumb {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         
-        .import-box-icon svg {
-            width: 24px;
-            height: 24px;
-            stroke: var(--accent-blue);
-            stroke-width: 2;
+        .product-thumb svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text-tertiary);
             fill: none;
+            stroke-width: 1.5;
         }
         
-        .import-box-text {
+        .product-info .product-name {
             font-size: 14px;
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 4px;
         }
         
-        .import-box-desc {
+        .product-info .product-quantity {
             font-size: 12px;
             color: var(--text-secondary);
         }
         
-        .import-history {
-            margin-top: 24px;
-        }
-        
-        .import-history-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
+        .result-prices {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
             margin-bottom: 12px;
         }
         
-        .import-history-item {
+        .price-original-row,
+        .price-compare-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 16px;
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            margin-bottom: 8px;
         }
         
-        .import-history-info h4 {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-primary);
-            margin-bottom: 2px;
-        }
-        
-        .import-history-info p {
-            font-size: 11px;
+        .price-label {
+            font-size: 12px;
             color: var(--text-secondary);
         }
         
-        .import-history-time {
-            font-size: 11px;
-            color: var(--text-tertiary);
+        .price-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .price-value.best {
+            color: var(--accent-green);
+        }
+        
+        .price-value.good {
+            color: var(--accent-green);
+        }
+        
+        .result-save-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .save-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .save-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent-green);
+        }
+        
+        .result-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .result-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .result-btn.primary {
+            background: var(--accent-green);
+            color: white;
+        }
+        
+        .result-btn.secondary {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        .import-tip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: var(--accent-blue-light);
+            border-radius: 8px;
+        }
+        
+        .import-tip svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--accent-blue);
+            fill: none;
+            stroke-width: 2;
+        }
+        
+        .import-tip span {
+            font-size: 12px;
+            color: var(--accent-blue);
         }
         
         /* 智能补货页 */
@@ -3003,46 +3137,135 @@
             <div class="status-menu" onclick="goBack()" style="background: transparent;">
                 <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
             </div>
-            <span style="flex:1; text-align:center; font-size:14px; font-weight:600;">批量导入</span>
+            <span style="flex:1; text-align:center; font-size:14px; font-weight:600;">导入订单</span>
             <div style="width:28px;"></div>
         </div>
         
         <div class="screen-content full">
-            <div class="import-header">
-                <h1 class="import-title">导入采购订单</h1>
-            </div>
-            
-            <div class="import-area">
-                <div class="import-box" onclick="showToast('上传订单文件')">
-                    <div class="import-box-icon">
-                        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <div class="import-content">
+                <!-- 导入进度 -->
+                <div class="import-progress">
+                    <div class="progress-header">
+                        <span class="progress-title">导入进度</span>
+                        <span class="progress-status success">已完成</span>
                     </div>
-                    <div class="import-box-text">上传订单文件</div>
-                    <div class="import-box-desc">支持 Excel、CSV 格式</div>
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar full"></div>
+                    </div>
+                    <div class="progress-stats">
+                        <span>已导入 156 条订单</span>
+                        <span>匹配 142 条</span>
+                    </div>
                 </div>
                 
-                <div class="import-history">
-                    <div class="import-history-title">历史导入</div>
-                    <div class="import-history-item">
-                        <div class="import-history-info">
-                            <h4>2024年5月采购订单.xlsx</h4>
-                            <p>28笔订单 · 节省 ¥12,580</p>
-                        </div>
-                        <div class="import-history-time">3天前</div>
+                <!-- 比价结果 -->
+                <div class="compare-results">
+                    <div class="results-header">
+                        <span class="results-title">比价结果</span>
+                        <span class="results-save">可节省 ¥15,680</span>
                     </div>
-                    <div class="import-history-item">
-                        <div class="import-history-info">
-                            <h4>2024年4月采购订单.xlsx</h4>
-                            <p>35笔订单 · 节省 ¥8,920</p>
+                    
+                    <div class="result-item highlight" onclick="showToast('查看商品详情')">
+                        <div class="result-product">
+                            <div class="product-thumb">
+                                <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-name">办公显示器 Dell 24寸</div>
+                                <div class="product-quantity">采购数量: 20台</div>
+                            </div>
                         </div>
-                        <div class="import-history-time">1个月前</div>
+                        <div class="result-prices">
+                            <div class="price-original-row">
+                                <span class="price-label">原采购价</span>
+                                <span class="price-value">¥1,299/台</span>
+                            </div>
+                            <div class="price-compare-row">
+                                <span class="price-label">比价找到</span>
+                                <span class="price-value best">¥899/台</span>
+                            </div>
+                        </div>
+                        <div class="result-save-row">
+                            <span class="save-label">可节省</span>
+                            <span class="save-value">¥8,000</span>
+                        </div>
+                        <div class="result-actions">
+                            <div class="result-btn secondary" onclick="showToast('查看详情')">查看详情</div>
+                            <div class="result-btn primary" onclick="showToast('已发起采购')">一键下单</div>
+                        </div>
                     </div>
+                    
+                    <div class="result-item" onclick="showToast('查看商品详情')">
+                        <div class="result-product">
+                            <div class="product-thumb">
+                                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-name">办公椅 人体工学款</div>
+                                <div class="product-quantity">采购数量: 15把</div>
+                            </div>
+                        </div>
+                        <div class="result-prices">
+                            <div class="price-original-row">
+                                <span class="price-label">原采购价</span>
+                                <span class="price-value">¥680/把</span>
+                            </div>
+                            <div class="price-compare-row">
+                                <span class="price-label">比价找到</span>
+                                <span class="price-value good">¥520/把</span>
+                            </div>
+                        </div>
+                        <div class="result-save-row">
+                            <span class="save-label">可节省</span>
+                            <span class="save-value">¥2,400</span>
+                        </div>
+                        <div class="result-actions">
+                            <div class="result-btn secondary" onclick="showToast('查看详情')">查看详情</div>
+                            <div class="result-btn primary" onclick="showToast('已发起采购')">一键下单</div>
+                        </div>
+                    </div>
+                    
+                    <div class="result-item" onclick="showToast('查看商品详情')">
+                        <div class="result-product">
+                            <div class="product-thumb">
+                                <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-name">咖啡胶囊 Nespresso</div>
+                                <div class="product-quantity">采购数量: 100盒</div>
+                            </div>
+                        </div>
+                        <div class="result-prices">
+                            <div class="price-original-row">
+                                <span class="price-label">原采购价</span>
+                                <span class="price-value">¥68/盒</span>
+                            </div>
+                            <div class="price-compare-row">
+                                <span class="price-label">比价找到</span>
+                                <span class="price-value good">¥52/盒</span>
+                            </div>
+                        </div>
+                        <div class="result-save-row">
+                            <span class="save-label">可节省</span>
+                            <span class="save-value">¥1,600</span>
+                        </div>
+                        <div class="result-actions">
+                            <div class="result-btn secondary" onclick="showToast('查看详情')">查看详情</div>
+                            <div class="result-btn primary" onclick="showToast('已发起采购')">一键下单</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 操作提示 -->
+                <div class="import-tip">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    <span>32 个商品找到更低价格，建议尽快下单锁定优惠</span>
                 </div>
             </div>
         </div>
         
         <div class="input-bar">
-            <input type="text" class="input-field" placeholder="询问导入相关问题...">
+            <input type="text" class="input-field" placeholder="继续导入订单...">
             <div class="input-send" onclick="showToast('发送消息')">
                 <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
             </div>
