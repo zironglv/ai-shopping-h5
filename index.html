@@ -1645,6 +1645,470 @@
             opacity: 1;
         }
         
+        /* 列表页样式 */
+        .list-page {
+            padding: 16px;
+        }
+        
+        .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .list-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .list-filter {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .filter-btn {
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .filter-btn.active {
+            background: var(--text-primary);
+            color: white;
+        }
+        
+        .list-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        
+        .list-item-image {
+            width: 56px;
+            height: 56px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .list-item-image svg {
+            width: 28px;
+            height: 28px;
+            color: var(--text-tertiary);
+        }
+        
+        .list-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .list-item-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .list-item-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+        }
+        
+        .list-item-price {
+            font-weight: 600;
+            color: var(--accent-red);
+        }
+        
+        .list-item-old-price {
+            color: var(--text-tertiary);
+            text-decoration: line-through;
+        }
+        
+        .list-item-tag {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        
+        .list-item-tag.drop {
+            background: var(--accent-red-light);
+            color: var(--accent-red);
+        }
+        
+        /* 商品详情页样式 */
+        .detail-gallery {
+            height: 200px;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: -16px -20px 16px;
+        }
+        
+        .detail-gallery svg {
+            width: 80px;
+            height: 80px;
+            color: var(--text-tertiary);
+        }
+        
+        .detail-info {
+            padding: 0 4px;
+        }
+        
+        .detail-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        
+        .detail-ai-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+        
+        .ai-tag.good {
+            background: var(--accent-green-light);
+            color: var(--accent-green);
+        }
+        
+        .ai-tag.top {
+            background: var(--accent-purple-light);
+            color: var(--accent-purple);
+        }
+        
+        .ai-tag.safe {
+            background: var(--accent-blue-light);
+            color: var(--accent-blue);
+        }
+        
+        .detail-price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .detail-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-red);
+        }
+        
+        .detail-original {
+            font-size: 14px;
+            color: var(--text-tertiary);
+            text-decoration: line-through;
+        }
+        
+        .detail-discount {
+            font-size: 12px;
+            color: var(--accent-red);
+            background: var(--accent-red-light);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        
+        .detail-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .detail-tag {
+            padding: 4px 10px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .detail-section {
+            margin-bottom: 20px;
+        }
+        
+        .detail-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+        
+        .detail-ai-analysis {
+            background: var(--accent-blue-light);
+            border-radius: 12px;
+            padding: 16px;
+        }
+        
+        .ai-analysis-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        
+        .ai-analysis-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .ai-analysis-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        
+        .ai-analysis-icon.good {
+            background: var(--accent-green);
+            color: white;
+        }
+        
+        .ai-analysis-icon.info {
+            background: var(--accent-blue);
+            color: white;
+        }
+        
+        .ai-analysis-text {
+            font-size: 13px;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+        
+        .detail-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        .detail-btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            border: none;
+        }
+        
+        .detail-btn.primary {
+            background: var(--text-primary);
+            color: white;
+        }
+        
+        .detail-btn.secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        
+        /* 企业版数据概览页样式 */
+        .overview-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 16px;
+        }
+        
+        .overview-stat-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 16px;
+        }
+        
+        .overview-stat-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-bottom: 4px;
+        }
+        
+        .overview-stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .overview-stat-value.green {
+            color: var(--accent-green);
+        }
+        
+        .overview-stat-value.red {
+            color: var(--accent-red);
+        }
+        
+        .overview-stat-change {
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        
+        .overview-stat-change.up {
+            color: var(--accent-green);
+        }
+        
+        .overview-stat-change.down {
+            color: var(--accent-red);
+        }
+        
+        .overview-section {
+            padding: 0 16px 16px;
+        }
+        
+        .overview-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        
+        .quick-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+        
+        .quick-action-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quick-action-icon svg {
+            width: 22px;
+            height: 22px;
+            color: var(--text-primary);
+        }
+        
+        .quick-action-text {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+        
+        .pending-list {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 4px 0;
+        }
+        
+        .pending-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            cursor: pointer;
+        }
+        
+        .pending-item:not(:last-child) {
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .pending-item-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .pending-item-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .pending-item-icon.alert {
+            background: var(--accent-red-light);
+            color: var(--accent-red);
+        }
+        
+        .pending-item-icon.warn {
+            background: var(--accent-yellow-light);
+            color: var(--accent-yellow);
+        }
+        
+        .pending-item-icon.info {
+            background: var(--accent-blue-light);
+            color: var(--accent-blue);
+        }
+        
+        .pending-item-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .pending-item-text {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+        
+        .pending-item-badge {
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: var(--accent-red);
+            color: white;
+        }
+        
+        /* Toast提示 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.75);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        
+        .toast.show {
+            opacity: 1;
+        }
+        
         /* Loading动画 */
         .loading-dots {
             display: flex;
@@ -1710,7 +2174,7 @@
                             <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                             <span>家人档案</span>
                         </div>
-                        <div class="menu-item" onclick="showToast('我的关注')">
+                        <div class="menu-item" onclick="navigateTo('list')">
                             <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
                             <span>我的关注</span>
                         </div>
@@ -1993,6 +2457,162 @@
         </div>
     </div>
     
+    <!-- ========== 列表页 ========== -->
+    <div id="page-list" class="page">
+        <div class="status-bar">
+            <div class="status-menu" onclick="goBack()" style="background: transparent;">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            </div>
+            <span style="flex:1; text-align:center; font-size:14px; font-weight:600;">我的关注</span>
+            <div class="status-menu" onclick="showToast('添加关注')" style="background: transparent;">
+                <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+        </div>
+        
+        <div class="screen-content full">
+            <div class="list-page">
+                <div class="list-header">
+                    <h2 class="list-title">全部关注</h2>
+                    <div class="list-filter">
+                        <div class="filter-btn active">全部</div>
+                        <div class="filter-btn">降价</div>
+                    </div>
+                </div>
+                
+                <div class="list-item" onclick="navigateTo('detail')">
+                    <div class="list-item-image">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    </div>
+                    <div class="list-item-info">
+                        <div class="list-item-name">茅台飞天53度 500ml</div>
+                        <div class="list-item-meta">
+                            <span class="list-item-price">¥1,499</span>
+                            <span class="list-item-old-price">¥1,699</span>
+                            <span class="list-item-tag drop">降价200</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="list-item" onclick="navigateTo('detail')">
+                    <div class="list-item-image">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    </div>
+                    <div class="list-item-info">
+                        <div class="list-item-name">戴森 V15 Detect 吸尘器</div>
+                        <div class="list-item-meta">
+                            <span class="list-item-price">¥4,990</span>
+                            <span class="list-item-old-price">¥5,990</span>
+                            <span class="list-item-tag drop">降价1000</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="list-item" onclick="navigateTo('detail')">
+                    <div class="list-item-image">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    </div>
+                    <div class="list-item-info">
+                        <div class="list-item-name">索尼 WH-CH720N 耳机</div>
+                        <div class="list-item-meta">
+                            <span class="list-item-price">¥999</span>
+                            <span class="list-item-old-price">¥1,299</span>
+                            <span class="list-item-tag drop">降价300</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="list-item" onclick="navigateTo('detail')">
+                    <div class="list-item-image">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    </div>
+                    <div class="list-item-info">
+                        <div class="list-item-name">海尔冰箱 BCD-500</div>
+                        <div class="list-item-meta">
+                            <span class="list-item-price">¥3,299</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="list-item" onclick="navigateTo('detail')">
+                    <div class="list-item-image">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    </div>
+                    <div class="list-item-info">
+                        <div class="list-item-name">Godiva 巧克力礼盒</div>
+                        <div class="list-item-meta">
+                            <span class="list-item-price">¥299</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== 商品详情页 ========== -->
+    <div id="page-detail" class="page">
+        <div class="status-bar">
+            <div class="status-menu" onclick="goBack()" style="background: transparent;">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            </div>
+            <span style="flex:1; text-align:center; font-size:14px; font-weight:600;">商品详情</span>
+            <div class="status-menu" onclick="showToast('已添加监控')" style="background: transparent;">
+                <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+        </div>
+        
+        <div class="screen-content full">
+            <div class="detail-gallery">
+                <svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+            </div>
+            
+            <div class="detail-info">
+                <h1 class="detail-title">索尼 WH-CH720N 无线降噪耳机</h1>
+                
+                <div class="detail-ai-tags">
+                    <span class="ai-tag good">全网 2.8万人说降噪效果好</span>
+                    <span class="ai-tag top">舒适度高于同类 95%</span>
+                    <span class="ai-tag safe">索尼官方旗舰店</span>
+                </div>
+                
+                <div class="detail-price-row">
+                    <span class="detail-price">¥999</span>
+                    <span class="detail-original">¥1,299</span>
+                    <span class="detail-discount">省 300 元</span>
+                </div>
+                
+                <div class="detail-tags">
+                    <span class="detail-tag">黑色</span>
+                    <span class="detail-tag">无线蓝牙</span>
+                    <span class="detail-tag">主动降噪</span>
+                    <span class="detail-tag">续航35小时</span>
+                </div>
+                
+                <div class="detail-section">
+                    <h3 class="detail-section-title">🤖 AI 智能分析</h3>
+                    <div class="detail-ai-analysis">
+                        <div class="ai-analysis-item">
+                            <div class="ai-analysis-icon good">✓</div>
+                            <div class="ai-analysis-text">价格处于历史低位，近30天最低价</div>
+                        </div>
+                        <div class="ai-analysis-item">
+                            <div class="ai-analysis-icon good">✓</div>
+                            <div class="ai-analysis-text">降噪效果优秀，用户满意度92%</div>
+                        </div>
+                        <div class="ai-analysis-item">
+                            <div class="ai-analysis-icon info">💡</div>
+                            <div class="ai-analysis-text">相似推荐：华为FreeBuds Pro 3，¥899</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-actions">
+                    <div class="detail-btn secondary" onclick="showToast('已加入购物车')">加入购物车</div>
+                    <div class="detail-btn primary" onclick="showToast('立即购买')">立即购买</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- ========== 企业版欢迎页 ========== -->
     <div id="page-enterprise-home" class="page">
         <div class="status-bar">
@@ -2026,6 +2646,10 @@
                 <div class="status-menu" onclick="toggleMenuDropdown(event)">
                     <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
                     <div id="menu-dropdown-enterprise" class="menu-dropdown">
+                        <div class="menu-item" onclick="navigateTo('overview')">
+                            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                            <span>数据概览</span>
+                        </div>
                         <div class="menu-item" onclick="navigateTo('invoice')">
                             <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                             <span>发票抬头管理</span>
@@ -2106,6 +2730,157 @@
             <input type="text" class="input-field" placeholder="说点什么..." onkeypress="handleEnterpriseKeyPress(event)">
             <div class="input-send" onclick="showToast('发送消息')">
                 <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== 企业版数据概览页 ========== -->
+    <div id="page-overview" class="page">
+        <div class="status-bar">
+            <span class="status-time">09:41</span>
+            <div class="status-icons">
+                <div class="status-version enterprise" onclick="toggleVersionDropdown(event)">
+                    <span>企业版</span>
+                    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                    <div id="version-dropdown-overview" class="version-dropdown">
+                        <div class="version-option" onclick="switchVersion('personal')">
+                            <div class="version-option-icon personal">
+                                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            </div>
+                            <div class="version-option-text">
+                                <div class="version-option-name">个人版</div>
+                                <div class="version-option-desc">省心省钱购物助手</div>
+                            </div>
+                        </div>
+                        <div class="version-option active" onclick="switchVersion('enterprise')">
+                            <div class="version-option-icon enterprise">
+                                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                            </div>
+                            <div class="version-option-text">
+                                <div class="version-option-name">企业版</div>
+                                <div class="version-option-desc">批量成本优化 + 发票管理 + 员工福利</div>
+                            </div>
+                            <svg class="version-option-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="status-menu" onclick="toggleMenuDropdown(event)">
+                    <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                    <div id="menu-dropdown-overview" class="menu-dropdown">
+                        <div class="menu-item" onclick="navigateTo('import')">
+                            <svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+                            <span>导入订单</span>
+                        </div>
+                        <div class="menu-item" onclick="navigateTo('replenish')">
+                            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                            <span>补货预测</span>
+                        </div>
+                        <div class="menu-item" onclick="navigateTo('analytics')">
+                            <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                            <span>数据分析</span>
+                        </div>
+                        <div class="menu-item" onclick="navigateTo('supplier')">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <span>供应商评估</span>
+                        </div>
+                        <div class="menu-divider"></div>
+                        <div class="menu-item" onclick="navigateTo('invoice')">
+                            <svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2" ry="2"/><line x1="15" y1="2" x2="15" y2="6"/><line x1="9" y1="2" x2="9" y2="6"/><path d="M9 12h6"/><path d="M9 16h6"/></svg>
+                            <span>发票抬头管理</span>
+                        </div>
+                        <div class="menu-item" onclick="navigateTo('festival')">
+                            <svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M9 16l2 2 4-4"/></svg>
+                            <span>节日福利</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="screen-content full">
+            <div class="overview-stats">
+                <div class="overview-stat-card">
+                    <div class="overview-stat-label">本月采购额</div>
+                    <div class="overview-stat-value">¥128.5万</div>
+                    <div class="overview-stat-change down">较上月 -12%</div>
+                </div>
+                <div class="overview-stat-card">
+                    <div class="overview-stat-label">节省成本</div>
+                    <div class="overview-stat-value green">¥15.3万</div>
+                    <div class="overview-stat-change up">优化率 11.9%</div>
+                </div>
+                <div class="overview-stat-card">
+                    <div class="overview-stat-label">待处理订单</div>
+                    <div class="overview-stat-value red">23</div>
+                    <div class="overview-stat-change">需要跟进</div>
+                </div>
+                <div class="overview-stat-card">
+                    <div class="overview-stat-label">供应商数量</div>
+                    <div class="overview-stat-value">47</div>
+                    <div class="overview-stat-change up">新增 3 家</div>
+                </div>
+            </div>
+            
+            <div class="overview-section">
+                <h3 class="overview-section-title">快捷操作</h3>
+                <div class="quick-actions">
+                    <div class="quick-action" onclick="navigateTo('import')">
+                        <div class="quick-action-icon">
+                            <svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+                        </div>
+                        <span class="quick-action-text">导入订单</span>
+                    </div>
+                    <div class="quick-action" onclick="navigateTo('replenish')">
+                        <div class="quick-action-icon">
+                            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                        </div>
+                        <span class="quick-action-text">补货预测</span>
+                    </div>
+                    <div class="quick-action" onclick="navigateTo('analytics')">
+                        <div class="quick-action-icon">
+                            <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                        </div>
+                        <span class="quick-action-text">数据分析</span>
+                    </div>
+                    <div class="quick-action" onclick="navigateTo('festival')">
+                        <div class="quick-action-icon">
+                            <svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M9 16l2 2 4-4"/></svg>
+                        </div>
+                        <span class="quick-action-text">节日福利</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="overview-section">
+                <h3 class="overview-section-title">待处理事项</h3>
+                <div class="pending-list">
+                    <div class="pending-item" onclick="navigateTo('import')">
+                        <div class="pending-item-left">
+                            <div class="pending-item-icon alert">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                            </div>
+                            <span class="pending-item-text">3笔订单待确认发票</span>
+                        </div>
+                        <span class="pending-item-badge">紧急</span>
+                    </div>
+                    <div class="pending-item" onclick="navigateTo('replenish')">
+                        <div class="pending-item-left">
+                            <div class="pending-item-icon warn">
+                                <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                            </div>
+                            <span class="pending-item-text">办公用品库存告急</span>
+                        </div>
+                        <span class="pending-item-badge">5项</span>
+                    </div>
+                    <div class="pending-item" onclick="navigateTo('supplier')">
+                        <div class="pending-item-left">
+                            <div class="pending-item-icon info">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            </div>
+                            <span class="pending-item-text">供应商A本月评分待更新</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
